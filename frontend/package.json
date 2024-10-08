@@ -1,0 +1,26 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "axios": "^1.7.7",
+    "nuxt": "^3.13.0",
+    "pinia": "^2.2.4",
+    "vue": "latest",
+    "vue-router": "latest"
+  },
+  "devDependencies": {
+    "@nuxt/typescript-build": "^3.0.2",
+    "typescript": "^5.6.2"
+  },
+  "overrides": {
+    "vue": "latest"
+  }
+}
