@@ -1,5 +1,18 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2024-04-03',
-  devtools: { enabled: true }
-})
+  modules: ["@pinia/nuxt"],
+  axios: {
+    proxy: true,
+  },
+  proxy: {
+    "/api/": { target: "http://localhost:5000", pathRewrite: { "^/api/": "" } },
+  },
+  runtimeConfig: {
+    public: {
+      apiUrl: process.env.API_URL || "http://localhost:5000",
+      spacexApiUrl:
+        process.env.SPACEX_API_URL || "https://api.spacexdata.com/v4",
+    },
+  },
+  devtools: { enabled: true },
+});
