@@ -80,7 +80,36 @@ A web application built with Nuxt 3, Vue 3, Pinia, and shadcn for the frontend, 
    ```
 
 5. **Run the frontend:**
+
    ```bash
     cd backend
     npm run dev
    ```
+
+6. **Open the app in your broweser:**
+   Frontend will be served at: http://localhost:3000
+   Backend will be served at: http://localhost:5000
+
+## API Endpoints
+
+- `GET /launches`: Fetch SpaceX launches from the SpaceX API.
+- `POST /launches`: Save a launch.
+- `DELETE /launches/:id`: Delete a saved launch.
+
+## Folder Structure
+
+```bash
+spacex-app/
+├── backend/                # Express backend
+│   ├── models/             # Mongoose models
+│   ├── routes/             # API routes
+│   ├── app.js              # Express app setup
+│   └── server.js           # Server configuration
+├── frontend/               # Nuxt 3 frontend
+│   ├── components/         # Vue components
+│   ├── pages/              # Nuxt pages
+│   ├── stores/             # Pinia stores
+│   └── layouts/            # Layout files
+├── README.md               # Project documentation
+└── .gitignore              # Files to ignore in Git
+```
