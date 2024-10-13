@@ -4,7 +4,7 @@
 
     <!-- Button to navigate to the saved launches page -->
     <NuxtLink to="/saved">
-      <button>View Saved Launches</button>
+      <Button>View Saved Launches</Button>
     </NuxtLink>
 
     <table v-if="!store.loading">
@@ -14,10 +14,10 @@
         <td>{{ launch.date_utc }}</td>
         <td>
           <!-- Check if the launch is being saved by looking at savingLaunches array -->
-          <button v-if="!store.isLaunchSaved(launch)" @click="saveLaunch(launch)" :disabled="store.savingLaunches.includes(launch.name)">
+          <Button v-if="!store.isLaunchSaved(launch)" @click="saveLaunch(launch)" :disabled="store.savingLaunches.includes(launch.name)">
             <span v-if="store.savingLaunches.includes(launch.name)">Saving...</span>
             <span v-else>Save</span>
-          </button>
+          </Button>
           <span v-else>Saved</span>
         </td>
       </tr>
