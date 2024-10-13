@@ -1,8 +1,9 @@
 <template>
+  <NuxtLoadingIndicator />
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
-  <Toaster rich-colors="true" close-button="true"/>
+  <Toaster rich-colors close-button />
 </template>
 
 <script setup lang="ts">

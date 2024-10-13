@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="layout">
     <header class="header">
       <NuxtLink to="/">
         <h1 class="logo">SpaceX Explorer</h1>
@@ -25,6 +25,14 @@
 </template>
 
 <style scoped>
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; 
+}
+
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -43,10 +51,11 @@ nav a {
 }
 
 .content-container {
+  flex-grow: 1;
   margin: 0 auto;
   padding-left: 10px;
   padding-right: 10px;
-  max-width: 1400px;
+  min-width: 80%;
 }
 
 .footer {

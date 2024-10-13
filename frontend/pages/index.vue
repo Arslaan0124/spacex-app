@@ -25,7 +25,6 @@
               v-if="!store.isLaunchSaved(launch)"
               @click="saveLaunch(launch)"
               :disabled="store.savingLaunches.includes(launch.name)"
-              variant="secondary"
             >
               <Loader2
                 class="w-4 h-4 mr-2 animate-spin"
@@ -33,7 +32,7 @@
               />
               <span v-else>Save</span>
             </Button>
-            <small v-else class="text-sm font-medium leading-none">
+            <small v-else class="text-sm font-medium leading-none px-3">
               Saved
             </small>
           </TableCell>
@@ -41,7 +40,9 @@
       </TableBody>
     </Table>
 
-    <div v-if="store.loading" class="mt-4">Loading...</div>
+    <div v-if="store.loading"class="flex justify-center items-center">
+      <Loader2 class="w-16 h-16 animate-spin text-gray-500" />
+    </div>
   </div>
 </template>
 
@@ -82,5 +83,3 @@ const saveLaunch = async (launch: any) => {
   }
 };
 </script>
-
-<style scoped></style>

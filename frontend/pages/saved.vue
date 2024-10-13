@@ -2,7 +2,9 @@
   <div class="saved-launches-container">
     <h1 class="text-xl font-bold mb-4">Saved Launches</h1>
 
-    <div v-if="store.loading" class="mt-4">Loading...</div>
+    <div v-if="store.loading" class="flex justify-center items-center">
+      <Loader2 class="w-16 h-16 animate-spin text-gray-500" />
+    </div>
 
     <div v-if="!store.loading" class="launches-grid">
       <Card
