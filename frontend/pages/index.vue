@@ -14,10 +14,11 @@
         <td>{{ launch.date_utc }}</td>
         <td>
           <!-- Check if the launch is being saved by looking at savingLaunches array -->
-          <button @click="saveLaunch(launch)" :disabled="store.savingLaunches.includes(launch.name)">
+          <button v-if="!store.isLaunchSaved(launch)" @click="saveLaunch(launch)" :disabled="store.savingLaunches.includes(launch.name)">
             <span v-if="store.savingLaunches.includes(launch.name)">Saving...</span>
             <span v-else>Save</span>
           </button>
+          <span v-else>Saved</span>
         </td>
       </tr>
     </table>

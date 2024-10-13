@@ -22,11 +22,22 @@ export const useLaunchStore = defineStore("launchStore", {
     savingLaunches: [],
   }),
 
+  getters: {
+    isLaunchSaved: (state) => {
+      return (launch: Launch) =>
+        state.savedLaunches.some(
+          (savedLaunch) => savedLaunch.name === launch.name
+        );
+    },
+  },
+
   actions: {
     async fetchLaunches() {
       this.loading = true;
       try {
         this.launches = await fetchLaunches();
+        // Fetch saved launches after fetching all launches
+        await this.fetchSavedLaunches();
       } catch (error) {
         console.error("Error fetching launches", error);
       } finally {
