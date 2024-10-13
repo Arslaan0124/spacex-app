@@ -22,22 +22,44 @@
             {{ new Date(launch.date_utc).toLocaleTimeString() }}
           </p>
         </CardContent>
-        <CardFooter>
-          <Button
-            @click="deleteLaunch(launch._id)"
-            :disabled="store.deletingLaunches.includes(launch._id)"
-            variant="destructive"
-            class="w-full"
-          >
-            <Loader2
-              class="w-4 h-4 mr-2 animate-spin"
-              v-if="store.deletingLaunches.includes(launch._id)"
-            />
-            <span v-if="store.deletingLaunches.includes(launch._id)"
-              >Deleting...</span
-            >
-            <span v-else>Delete</span>
-          </Button>
+        <CardFooter class="card-footer">
+          <AlertDialog>
+            <AlertDialogTrigger as-child>
+              <Button
+                :disabled="store.deletingLaunches.includes(launch._id)"
+                variant="destructive"
+                class="w-full"
+              >
+                <Loader2
+                  class="w-4 h-4 mr-2 animate-spin"
+                  v-if="store.deletingLaunches.includes(launch._id)"
+                />
+                <span v-if="store.deletingLaunches.includes(launch._id)"
+                  >Deleting...</span
+                >
+                <span v-else>Delete</span>
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Confirm Deletion</AlertDialogTitle>
+                <AlertDialogDescription>
+                  Are you sure you want to delete this launch? This action
+                  cannot be undone.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogAction
+                  variant="destructive"
+                  @click="deleteLaunch(launch._id)"
+                  :disabled="store.deletingLaunches.includes(launch._id)"
+                >
+                  Confirm Delete
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         </CardFooter>
       </Card>
     </div>
@@ -55,6 +77,17 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { Loader2 } from "lucide-vue-next";
 import { toast } from "vue-sonner";
 
@@ -94,5 +127,9 @@ const deleteLaunch = async (id: string) => {
   &:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
+}
+
+.card-footer {
+  margin-top: auto;
 }
 </style>
