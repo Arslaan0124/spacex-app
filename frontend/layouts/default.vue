@@ -19,7 +19,7 @@
     </main>
 
     <footer class="footer">
-      <p>&copy; 2024 SpaceX Explorer. All rights reserved.</p>
+      <p>&copy; 2024 SpaceX Explorer. Made by Arslan Tariq</p>
     </footer>
   </div>
 </template>

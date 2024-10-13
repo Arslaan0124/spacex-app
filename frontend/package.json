@@ -22,7 +22,8 @@
     "tailwind-merge": "^2.5.3",
     "tailwindcss-animate": "^1.0.7",
     "vue": "latest",
-    "vue-router": "latest"
+    "vue-router": "latest",
+    "vue-sonner": "^1.2.1"
   },
   "devDependencies": {
     "@nuxt/typescript-build": "^3.0.2",

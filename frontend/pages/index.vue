@@ -15,15 +15,27 @@
         <TableRow v-for="launch in store.launches" :key="launch.flight_number">
           <TableCell>{{ launch.flight_number }}</TableCell>
           <TableCell>{{ launch.name }}</TableCell>
-          <TableCell>{{ new Date(launch.date_utc).toLocaleDateString() }} {{ new Date(launch.date_utc).toLocaleTimeString() }}</TableCell>
+          <TableCell
+            >{{ new Date(launch.date_utc).toLocaleDateString() }}
+            {{ new Date(launch.date_utc).toLocaleTimeString() }}</TableCell
+          >
           <TableCell>
             <!-- Check if the launch is being saved by looking at savingLaunches array -->
-            <Button v-if="!store.isLaunchSaved(launch)" @click="saveLaunch(launch)" :disabled="store.savingLaunches.includes(launch.name)" variant="secondary">
-              <Loader2 class="w-4 h-4 mr-2 animate-spin" v-if="store.savingLaunches.includes(launch.name)" />
-              <span v-if="store.savingLaunches.includes(launch.name)">Saving...</span>
+            <Button
+              v-if="!store.isLaunchSaved(launch)"
+              @click="saveLaunch(launch)"
+              :disabled="store.savingLaunches.includes(launch.name)"
+              variant="secondary"
+            >
+              <Loader2
+                class="w-4 h-4 mr-2 animate-spin"
+                v-if="store.savingLaunches.includes(launch.name)"
+              />
               <span v-else>Save</span>
             </Button>
-            <span v-else>Saved</span>
+            <small v-else class="text-sm font-medium leading-none">
+              Saved
+            </small>
           </TableCell>
         </TableRow>
       </TableBody>
@@ -34,8 +46,8 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue';
-import { useLaunchStore } from '~/stores/launchStore';
+import { onMounted } from "vue";
+import { useLaunchStore } from "~/stores/launchStore";
 import {
   Table,
   TableBody,
@@ -44,8 +56,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table'
-import { Loader2 } from 'lucide-vue-next'
+} from "@/components/ui/table";
+import { Loader2 } from "lucide-vue-next";
+import { toast } from "vue-sonner";
 
 const store = useLaunchStore();
 
@@ -53,10 +66,21 @@ onMounted(() => {
   store.fetchLaunches();
 });
 
-const saveLaunch = (launch: any) => {
-  store.saveLaunch(launch);
+const saveLaunch = async (launch: any) => {
+  try {
+    await store.saveLaunch(launch);
+
+    toast.success("Launch has been saved", {
+      description:
+        "Launch has been saved successfully, You can view it under saved launches",
+    });
+  } catch (error) {
+    toast.error("Error Saving Launch", {
+      description: `There was an error saving ${launch.name}. Please try again.`,
+      variant: "destructive",
+    });
+  }
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
