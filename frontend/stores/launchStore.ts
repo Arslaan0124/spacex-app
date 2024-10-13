@@ -12,6 +12,7 @@ interface LaunchStoreState {
   savedLaunches: Launch[];
   loading: boolean;
   savingLaunches: string[];
+  deletingLaunches: string[];
 }
 
 export const useLaunchStore = defineStore("launchStore", {
@@ -20,6 +21,7 @@ export const useLaunchStore = defineStore("launchStore", {
     savedLaunches: [],
     loading: false,
     savingLaunches: [],
+    deletingLaunches: [],
   }),
 
   getters: {
@@ -74,6 +76,8 @@ export const useLaunchStore = defineStore("launchStore", {
     },
 
     async deleteLaunch(id: string) {
+      if (this.deletingLaunches.includes(id)) return;
+      this.deletingLaunches.push(id);
       try {
         await deleteLaunch(id);
         this.savedLaunches = this.savedLaunches.filter(
@@ -81,6 +85,11 @@ export const useLaunchStore = defineStore("launchStore", {
         );
       } catch (error) {
         console.error("Error deleting launch", error);
+      } finally {
+        // Remove id from deletingLaunches after delete is done
+        this.deletingLaunches = this.deletingLaunches.filter(
+          (launchId) => launchId !== id
+        );
       }
     },
   },
