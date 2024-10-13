@@ -11,6 +11,7 @@ interface LaunchStoreState {
   launches: Launch[];
   savedLaunches: Launch[];
   loading: boolean;
+  savingLaunches: string[];
 }
 
 export const useLaunchStore = defineStore("launchStore", {
@@ -18,6 +19,7 @@ export const useLaunchStore = defineStore("launchStore", {
     launches: [],
     savedLaunches: [],
     loading: false,
+    savingLaunches: [],
   }),
 
   actions: {
@@ -44,11 +46,19 @@ export const useLaunchStore = defineStore("launchStore", {
     },
 
     async saveLaunch(launch: Launch) {
+      if (this.savingLaunches.includes(launch.name)) return; // Prevent multiple saves at once
+      this.savingLaunches.push(launch.name);
+
       try {
         const savedLaunch = await saveLaunch(launch);
         this.savedLaunches.push(savedLaunch);
       } catch (error) {
         console.error("Error saving launch", error);
+      } finally {
+        // Remove the flight number from the savingLaunches array after save is done
+        this.savingLaunches = this.savingLaunches.filter(
+          (name) => name !== launch.name
+        );
       }
     },
 
