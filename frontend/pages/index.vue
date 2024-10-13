@@ -67,7 +67,7 @@ onMounted(() => {
   store.fetchLaunches();
 });
 
-const saveLaunch = async (launch: any) => {
+const saveLaunch = async (launch: Launch) => {
   try {
     await store.saveLaunch(launch);
 
