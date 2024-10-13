@@ -1,5 +1,11 @@
 <template>
-  <div>
+  <NuxtLoadingIndicator />
+  <NuxtLayout>
     <NuxtPage />
-  </div>
+  </NuxtLayout>
+  <Toaster rich-colors close-button />
 </template>
+
+<script setup lang="ts">
+import { Toaster } from "@/components/ui/sonner";
+</script>

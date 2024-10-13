@@ -19,7 +19,7 @@ export const useLaunchStore = defineStore("launchStore", {
   state: (): LaunchStoreState => ({
     launches: [],
     savedLaunches: [],
-    loading: false,
+    loading: true,
     savingLaunches: [],
     deletingLaunches: [],
   }),

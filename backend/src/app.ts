@@ -11,8 +11,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const mongoURI =
+  process.env.DATABASE_URL || "mongodb://localhost:27017/spacex-launches";
 mongoose
-  .connect(process.env.MONGO_URI as string)
+  .connect(mongoURI as string)
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log("Error connecting to MongoDB", err));
 
