@@ -2,7 +2,7 @@
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
-  <Toaster position="top-right" rich-colors="true" close-button="true"/>
+  <Toaster rich-colors="true" close-button="true"/>
 </template>
 
 <script setup lang="ts">
